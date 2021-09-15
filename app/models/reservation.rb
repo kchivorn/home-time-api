@@ -1,4 +1,11 @@
 class Reservation < ApplicationRecord
+  belongs_to :guest
+
+  enum status: {
+    rejected: 0,
+    accepted: 1,
+    pending: 2
+  }
   validates :reservation_code, uniqueness: true, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
