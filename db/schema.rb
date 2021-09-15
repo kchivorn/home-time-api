@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_15_001223) do
+ActiveRecord::Schema.define(version: 2021_09_15_003047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,28 @@ ActiveRecord::Schema.define(version: 2021_09_15_001223) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_guests_on_email", unique: true
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.string "reservation_code", null: false
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.integer "nights", null: false
+    t.integer "guests", null: false
+    t.integer "adults", null: false
+    t.string "guest_localized_desc"
+    t.integer "children", null: false
+    t.integer "infants", null: false
+    t.integer "status", null: false
+    t.bigint "guest_id", null: false
+    t.string "currency", null: false
+    t.decimal "payout_price", precision: 16, scale: 2, null: false
+    t.decimal "security_price", precision: 16, scale: 2, null: false
+    t.decimal "total_price", precision: 16, scale: 2, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["guest_id"], name: "index_reservations_on_guest_id"
+    t.index ["reservation_code"], name: "index_reservations_on_reservation_code", unique: true
   end
 
 end
