@@ -1,6 +1,6 @@
 class Airbnb
   def initialize(data)
-    raise 'Reservation code cannot be nil' unless data[:reservation_code]
+    raise ExceptionHandler::MissingReservationCode, 'Reservation code cannot be empty' unless data[:reservation_code]
 
     @reservation_code = data[:reservation_code]
     @start_date = data[:start_date]
@@ -12,10 +12,12 @@ class Airbnb
     @infants = data[:infants]
     @guest_localized_desc = nil
     @status = data[:status]
+    raise ExceptionHandler::MissingGuest, 'Guest cannot be empty' unless data[:guest]
+
     @guest_email = data[:guest][:email]
     @guest_first_name = data[:guest][:first_name]
     @guest_last_name = data[:guest][:last_name]
-    @guest_phone = data[:guest][:phone]
+    @guest_phone = [data[:guest][:phone]]
     @currency = data[:currency]
     @payout_price = data[:payout_price]
     @security_price = data[:security_price]
