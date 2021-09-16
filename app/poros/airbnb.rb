@@ -1,5 +1,7 @@
 class Airbnb
   def initialize(data)
+    raise 'Reservation code cannot be nil' unless data[:reservation_code]
+
     @reservation_code = data[:reservation_code]
     @start_date = data[:start_date]
     @end_date = data[:end_date]

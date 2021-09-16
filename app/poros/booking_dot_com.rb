@@ -1,6 +1,8 @@
 class BookingDotCom
   def initialize(data)
     reservation = data[:reservation]
+    raise 'Reservation code cannot be nil' unless reservation[:code]
+
     @reservation_code = reservation[:code]
     @start_date = reservation[:start_date]
     @end_date = reservation[:end_date]
@@ -11,7 +13,7 @@ class BookingDotCom
     @children = guest_details[:number_of_children]
     @infants = guest_details[:number_of_infants]
     @guest_localized_desc = guest_details[:localized_description]
-    @status = data[:status_type]
+    @status = reservation[:status_type]
     @guest_email = reservation[:guest_email]
     @guest_first_name = reservation[:guest_first_name]
     @guest_last_name = reservation[:guest_last_name]
